@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sprawdź cenę Otaki</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; }
+        button { padding: 10px 20px; font-size: 16px; }
+        #price { margin-top: 20px; font-size: 20px; color: green; }
+    </style>
+</head>
+<body>
+    <h1>Sprawdź cenę La Sportiva Otaki</h1>
+    <button onclick="getPrice()">Pobierz cenę</button>
+    <p id="price">---</p>
+
+    <script>
+        async function getPrice() {
+            document.getElementById('price').innerText = 'Ładowanie...';
+            try {
+                const res = await fetch('/price');
+                const data = await res.json();
+                document.getElementById('price').innerText = data.price + ' €';
+            } catch (err) {
+                document.getElementById('price').innerText = 'Błąd podczas pobierania ceny';
+            }
+        }
+    </script>
+</body>
+</html>
